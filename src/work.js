@@ -12,19 +12,24 @@ const theme = css`
 const Thing = () => {
   const ref = useRef();
   useFrame(() => {
-    ref.current.rotation.y += 0.01;
-    ref.current.rotation.z += 0.01;
+    // ref.current.rotation.y += 0.01;
+    // ref.current.rotation.z += 0.01;
   });
   return (
     <mesh
       ref={ref}
+      position={[0, 0, 500]}
+      rotation={[0, 0.5, 0]}
       onClick={e => console.log('click')}
       onPointerOver={e => console.log('hover')}
       onPointerOut={e => console.log('unhover')}
     >
-      <boxGeometry attach='geometry' args={[400, 400, 400]} />
-      <meshNormalMaterial
-        attach='material'
+      {/* <boxGeometry attach='geometry' args={[400, 400, 400]} /> */}
+
+      {/* <div>THis is a DIV</div> */}
+      <planeGeometry attach='geometry' args={[500, 300, 32]} />
+      <meshBasicMaterial
+        attach='material' color='red' side='DoubleSide'
       />
     </mesh>
   );
@@ -32,7 +37,7 @@ const Thing = () => {
 
 export const Work = () => (
   <div css={theme}>
-    <Canvas camera={{ position: [0, 0, 1000] }}>
+    <Canvas camera={{ position: [0, 0, 1000], fov: 75, near: 0.1, far: 10000 }}>
       <Thing />
     </Canvas>
   </div>
